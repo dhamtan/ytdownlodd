@@ -36,3 +36,75 @@
     </script>
 </body>
 </html>
+
+viki, [17/02/2026 22:16]
+area.style.display = 'block';
+            area.innerHTML = 
+                <div class="spinner"></div>
+                <p>⏳ वीडियो प्रोसेस हो रहा है... थोड़ा रुकें</p>
+            ;
+
+            try {
+                // Method 1: SaveFrom (सबसे reliable)
+                let embedUrl = https://www.savefrom.net/embed/?url=${encodeURIComponent(url)};
+                if (await testUrl(embedUrl)) {
+                    showDownloadFrame(embedUrl, 'SaveFrom - सबसे तेज़');
+                    return;
+                }
+
+                // Method 2: Y2Mate style
+                embedUrl = https://www.y2mate.com/yt/?url=${encodeURIComponent(url)};
+                if (await testUrl(embedUrl)) {
+                    showDownloadFrame(embedUrl, 'Y2Mate');
+                    return;
+                }
+
+                // Method 3: Direct button generator
+                embedUrl = https://loader.to/api/button/?url=${encodeURIComponent(url)}&f=mp4&color=ff0000;
+                if (await testUrl(embedUrl)) {
+                    showDownloadFrame(embedUrl, 'Loader.to');
+                    return;
+                }
+
+                throw new Error('सभी services busy हैं');
+            } catch (error) {
+                area.innerHTML = 
+                    <div class="error">
+                        ❌ अभी download नहीं हो पा रहा। 5 मिनट बाद try करें या दूसरा link डालें।
+                    </div>
+                ;
+            }
+        }
+
+        async function testUrl(url) {
+            try {
+                const controller = new AbortController();
+                const timeout = setTimeout(() => controller.abort(), 5000);
+                const response = await fetch(url, { 
+                    method: 'HEAD', 
+                    signal: controller.signal 
+                });
+                clearTimeout(timeout);
+                return response.ok;
+            } catch {
+                return false;
+            }
+        }
+
+        function showDownloadFrame(src, service) {
+            const area = document.getElementById('downloadArea');
+            const frame = document.createElement('iframe');
+            frame.src = src;
+            frame.style.cssText = 'width:100%; height:120px; border:none; border-radius:12px;';
+            
+            area.innerHTML = <p style="margin-bottom:10px; color:#28a745;">✅ ${service} ready - Download button पर click करें!</p>;
+            area.appendChild(frame);
+        }
+
+        // Enter key support
+        document.getElementById('videoUrl').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') startDownload();
+        });
+    </script>
+</body>
+</html>
