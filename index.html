@@ -3,27 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simple YT Downloader</title>
+<title>Fast YouTube Downloader</title>
 <style>
-    body { font-family: Arial, sans-serif; background:#f2f2f2; text-align:center; padding:40px;}
-    input,button{padding:10px;border-radius:5px;border:1px solid #ccc;width:90%;max-width:400px;margin:10px auto;display:block;}
-    button{background:red;color:white;font-weight:bold;cursor:pointer;}
-    iframe{margin-top:20px;width:100%;max-width:500px;height:120px;border:none;}
+    body { font-family: Arial; background:#f2f2f2; text-align:center; padding:40px; }
+    input,button { padding:10px;border-radius:5px;border:1px solid #ccc;width:90%;max-width:400px;margin:10px auto;display:block;}
+    button{ background:red;color:white;font-weight:bold;cursor:pointer;}
 </style>
 </head>
 <body>
-<h2>🚀 YT Downloader</h2>
-<p>अपना YouTube लिंक नीचे डालें:</p>
-<input id="link" placeholder="https://youtube.com/...">
-<button onclick="generate()">Download Link बनाएं</button>
-<div id="frameArea"></div>
+<h2>🚀 Fast YT Downloader</h2>
+<p>अपना YouTube लिंक डालें:</p>
+<input id="ytlink" placeholder="https://youtu.be/...">
+<button onclick="go()">Download खोलें</button>
 
 <script>
-function generate(){
-    const url=document.getElementById("link").value.trim();
-    const area=document.getElementById("frameArea");
-    if(!url){alert("कृपया YouTube लिंक डालें!");return;}
-    area.innerHTML=<iframe src="https://loader.to/api/button/?url=${encodeURIComponent(url)}&f=mp4&color=ff0000"></iframe>;
+function go(){
+   const link = document.getElementById("ytlink").value.trim();
+   if(!link){ alert("लिंक डालें"); return; }
+   const finalURL = "https://loader.to/?url=" + encodeURIComponent(link);
+   window.open(finalURL, "_blank");
 }
 </script>
 </body>
