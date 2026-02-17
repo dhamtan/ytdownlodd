@@ -1,110 +1,30 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YTDownlo - Working Downloader</title>
-    <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; padding: 40px; background-color: #f4f4f4; }
-        .container { text-align: center; padding: 40px; border: 2px dashed #ccc; border-radius: 10px; background: white; max-width: 500px; width: 100%; }
-        input { width: 80%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
-        button { background-color: #e64a19; color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        #status { margin-top: 20px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple YT Downloader</title>
+<style>
+    body { font-family: Arial, sans-serif; background:#f2f2f2; text-align:center; padding:40px;}
+    input,button{padding:10px;border-radius:5px;border:1px solid #ccc;width:90%;max-width:400px;margin:10px auto;display:block;}
+    button{background:red;color:white;font-weight:bold;cursor:pointer;}
+    iframe{margin-top:20px;width:100%;max-width:500px;height:120px;border:none;}
+</style>
 </head>
 <body>
-    <div class="container">
-        <img src="https://cdn-icons-png.flaticon.com/512/2991/2991195.png" width="50" alt="icon">
-        <h2>YTDownlo</h2>
-        <p>यूट्यूब वीडियो लिंक यहाँ पेस्ट करें:</p>
-        <input type="text" id="videoUrl" placeholder="https://www.youtube.com/watch?v=...">
-        <br>
-        <button onclick="download()">Download</button>
-        <div id="status"></div>
-    </div>
+<h2>🚀 YT Downloader</h2>
+<p>अपना YouTube लिंक नीचे डालें:</p>
+<input id="link" placeholder="https://youtube.com/...">
+<button onclick="generate()">Download Link बनाएं</button>
+<div id="frameArea"></div>
 
-    <script>
-        function download() {
-            var url = document.getElementById('videoUrl').value;
-            var status = document.getElementById('status');
-            if (url == "") { alert("कृपया पहले लिंक पेस्ट करें!"); return; }
-
-            // यह लाइन डाउनलोडिंग सर्विस को कनेक्ट करेगी
-            status.innerHTML = '<p>लिंक तैयार हो रहा है... नीचे बटन पर क्लिक करें:</p>' +
-            '<iframe src="https://loader.to/api/button/?url=' + url + '&f=720" style="width:100%;height:60px;border:none;"></iframe>';
-        }
-    </script>
-</body>
-</html>
-
-viki, [17/02/2026 22:16]
-area.style.display = 'block';
-            area.innerHTML = 
-                <div class="spinner"></div>
-                <p>⏳ वीडियो प्रोसेस हो रहा है... थोड़ा रुकें</p>
-            ;
-
-            try {
-                // Method 1: SaveFrom (सबसे reliable)
-                let embedUrl = https://www.savefrom.net/embed/?url=${encodeURIComponent(url)};
-                if (await testUrl(embedUrl)) {
-                    showDownloadFrame(embedUrl, 'SaveFrom - सबसे तेज़');
-                    return;
-                }
-
-                // Method 2: Y2Mate style
-                embedUrl = https://www.y2mate.com/yt/?url=${encodeURIComponent(url)};
-                if (await testUrl(embedUrl)) {
-                    showDownloadFrame(embedUrl, 'Y2Mate');
-                    return;
-                }
-
-                // Method 3: Direct button generator
-                embedUrl = https://loader.to/api/button/?url=${encodeURIComponent(url)}&f=mp4&color=ff0000;
-                if (await testUrl(embedUrl)) {
-                    showDownloadFrame(embedUrl, 'Loader.to');
-                    return;
-                }
-
-                throw new Error('सभी services busy हैं');
-            } catch (error) {
-                area.innerHTML = 
-                    <div class="error">
-                        ❌ अभी download नहीं हो पा रहा। 5 मिनट बाद try करें या दूसरा link डालें।
-                    </div>
-                ;
-            }
-        }
-
-        async function testUrl(url) {
-            try {
-                const controller = new AbortController();
-                const timeout = setTimeout(() => controller.abort(), 5000);
-                const response = await fetch(url, { 
-                    method: 'HEAD', 
-                    signal: controller.signal 
-                });
-                clearTimeout(timeout);
-                return response.ok;
-            } catch {
-                return false;
-            }
-        }
-
-        function showDownloadFrame(src, service) {
-            const area = document.getElementById('downloadArea');
-            const frame = document.createElement('iframe');
-            frame.src = src;
-            frame.style.cssText = 'width:100%; height:120px; border:none; border-radius:12px;';
-            
-            area.innerHTML = <p style="margin-bottom:10px; color:#28a745;">✅ ${service} ready - Download button पर click करें!</p>;
-            area.appendChild(frame);
-        }
-
-        // Enter key support
-        document.getElementById('videoUrl').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') startDownload();
-        });
-    </script>
+<script>
+function generate(){
+    const url=document.getElementById("link").value.trim();
+    const area=document.getElementById("frameArea");
+    if(!url){alert("कृपया YouTube लिंक डालें!");return;}
+    area.innerHTML=<iframe src="https://loader.to/api/button/?url=${encodeURIComponent(url)}&f=mp4&color=ff0000"></iframe>;
+}
+</script>
 </body>
 </html>
