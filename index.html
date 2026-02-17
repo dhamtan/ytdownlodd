@@ -1,16 +1,38 @@
-<!DOCTYPE html><div style="text-align: center; font-family: sans-serif; padding: 40px; border: 2px dashed #ccc; border-radius: 10px;">
-  <img src="https://cdn-icons-png.flaticon.com/512/2991/2991195.png" width="50" alt="icon">
-  <h2>YTDownlo</h2>
-  <p>Free YouTube Video Downloader (MP3 & MP4)</p>
-  <input type="text" id="videoUrl" placeholder="Paste YouTube Link Here" style="width: 80%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
-  <br>
-  <button onclick="download()" style="background-color: #e64a19; color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Download Now</button>
-  <div id="status" style="margin-top:20px; font-weight:bold; color: #555;"></div>
-</div>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YTDownlo - Working Downloader</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; padding: 40px; background-color: #f4f4f4; }
+        .container { text-align: center; padding: 40px; border: 2px dashed #ccc; border-radius: 10px; background: white; max-width: 500px; width: 100%; }
+        input { width: 80%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
+        button { background-color: #e64a19; color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        #status { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://cdn-icons-png.flaticon.com/512/2991/2991195.png" width="50" alt="icon">
+        <h2>YTDownlo</h2>
+        <p>यूट्यूब वीडियो लिंक यहाँ पेस्ट करें:</p>
+        <input type="text" id="videoUrl" placeholder="https://www.youtube.com/watch?v=...">
+        <br>
+        <button onclick="download()">Download</button>
+        <div id="status"></div>
+    </div>
 
-<script>
-function download() { var url = document.getElementById('videoUrl').value;
-  if(url == "") { alert("Please paste a link first!"); return; }
-  document.getElementById('status').innerHTML = "Finding links...<br><br><a href='#' style='color:green'>Download 360p</a> | <a href='#' style='color:green'>Download 720p</a>";
-}
-</script>
+    <script>
+        function download() {
+            var url = document.getElementById('videoUrl').value;
+            var status = document.getElementById('status');
+            if (url == "") { alert("कृपया पहले लिंक पेस्ट करें!"); return; }
+
+            // यह लाइन डाउनलोडिंग सर्विस को कनेक्ट करेगी
+            status.innerHTML = '<p>लिंक तैयार हो रहा है... नीचे बटन पर क्लिक करें:</p>' +
+            '<iframe src="https://loader.to/api/button/?url=' + url + '&f=720" style="width:100%;height:60px;border:none;"></iframe>';
+        }
+    </script>
+</body>
+</html>
