@@ -1,39 +1,12 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fast YouTube Downloader</title>
-<style>
-    body { font-family: Arial; background:#f2f2f2; text-align:center; padding:40px; }
-    input,button { padding:10px;border-radius:5px;border:1px solid #ccc;width:90%;max-width:400px;margin:10px auto;display:block;}
-    button{ background:red;color:white;font-weight:bold;cursor:pointer;}
-</style>
-</head>
-<body>
-<h2>🚀 Fast YT Downloader</h2>
-<p>अपना YouTube लिंक डालें:</p>
-<input id="ytlink" placeholder="https://youtu.be/...">
-<button onclick="go()">Download खोलें</button>
-
-<script>
-function go(){
-   const link = document.getElementById("ytlink").value.trim();
-   if(!link){ alert("लिंक डालें"); return; }
-   const finalURL = "https://loader.to/?url=" + encodeURIComponent(link);
-   window.open(finalURL, "_blank");
-}
-</script>
-</body>
-</html>
-
-viki, [18/02/2026 01:12]
-<!DOCTYPE html>
-<html lang="hi">
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fast YouTube Downloader & MP3</title>
+
+    <meta name="monetag" content="582141df11779523445ef8c6a9577dc4">
+
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f9f9f9; text-align: center; padding: 20px; margin: 0; }
         .wrapper { max-width: 500px; margin: 20px auto; background: #fff; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 1px solid #eee; }
@@ -72,10 +45,8 @@ viki, [18/02/2026 01:12]
                 return;
             }
             
-            // पहले विज्ञापन वाला पेज खुलेगा (आपकी कमाई के लिए)
             window.open("https://www.highperformancegate.com/28634833", "_blank");
             
-            // फिर असली डाउनलोडर पेज खुलेगा
             const finalURL = "https://loader.to/?url=" + encodeURIComponent(link);
             window.open(finalURL, "_blank");
         }
