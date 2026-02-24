@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />        <title>Login · PopAds</title>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+	<link rel="stylesheet" type="text/css" href="//static.popads.net/css/login_set.css?1736503620" onerror="if(this.href.indexOf('static.')&gt;=0)this.href='//www.popads.net/css/login_set.css?1736503620'" />
+	<script type="text/javascript" src="//static.popads.net/js/jquery-3.7.1.min.js?1736503620" onerror="s=document.createElement('script');this.parentNode.appendChild(s);s.src='//www.popads.net/js/jquery-3.7.1.min.js?1736503620';"></script>
+	<script type="text/javascript" src="//static.popads.net/js/various.js?1749201005" onerror="s=document.createElement('script');this.parentNode.appendChild(s);s.src='//www.popads.net/js/various.js?1749201005';"></script>
+    </head>
+    <body>
+      <div id="container">
+        <img src="//static.popads.net/img/logo_login.png?1372079638" onerror="if(this.src.indexOf('static.')&gt;=0)this.src='//www.popads.net/img/logo_login.png?1372079638'" alt="" />        <script type="text/javascript" src="//static.popads.net/js/front_validator.js?1695037121" onerror="s=document.createElement('script');this.parentNode.appendChild(s);s.src='//www.popads.net/js/front_validator.js?1695037121';"></script><script src="//c.adsco.re" type="text/javascript"></script>
+<script type="text/javascript">
+(function(){
+    let lastCheck = 0;
+    let lastEc = 0;
+    let loginBoxLoaded = false;
+    $("#UserAdscore").val("US");
+    let loadLoginBox = function (sig) {
+        if (!loginBoxLoaded) {
+            $("div.form-loader").hide(); 
+            $("form").show();
+            loginBoxLoaded = true;
+        }
+        if (sig) {
+            $("#UserAdscore").val(sig);
+        }
+        $("#UserAdscoreEc").val(lastEc);
+        return true;
+    };
+    let updateSignature = function () {
+        if (lastCheck && (Date.now() - lastCheck < 60000)) {
+            return false;
+        }
+        if (window.AdscoreInit) { 
+            try {
+                AdscoreInit("QgEpAQAAAAAAKbzVC73d7KvD9MUxLPjvOq_lpo4", {
+                    callback: function(result) { 
+                        loadLoginBox(result.signature || "UF");
+                    },
+                    debug_callback: function(ec) {
+                        if ((ec > lastEc) || (lastEc === 0)) {
+                            lastEc = ec;
+                            $("#UserAdscoreEc").val(ec);
+                        } 
+                    }
+                                    });
+            } catch (e) {
+                loadLoginBox("UX");
+            }
+        } else {
+            loadLoginBox("UN");
+        }
+        if (!lastCheck) {
+            loadLoginBox("UI");
+        }
+        lastCheck = Date.now();
+        return true;
+    };
+    $(document).ready(function() {
+        updateSignature();
+        setTimeout(loadLoginBox, 5000);
+        setInterval(updateSignature, 1000);
+    });
+})(); 
+
+</script>
+<center style="margin-bottom: 10px;"></center>
+<div class="wrapper">
+    <div id="members_dash" class="ext">
+        <div class="top">Member's Dashboard</div>
+        <div class="content">
+            <div class="inner">
+                <div class="form-loader"></div><form action="/users/login?sid=36c638be2cdabf84a09bd84ee1a049088d0e7b09" class="hide" id="UserLoginForm" method="post" accept-charset="utf-8"><div style="display:none;"><input type="hidden" name="data[_Token][key]" value="EFNAwaJBU2NHn_4_LAhH84V7nEmHh1WEPvctGg64BtjcPHoUC3YEE1XhHDyK4C_LVqs3DaLtys5TuFKJZe-Vd-kAQDYA1sWbt1KChPUp8OSlDa0HfISMD5Zr7stszy4DZV4mMbH0BvR0ICQwRn6tVEkriTq5xhusq1sBrR0cYcx6FDc3PjDtFAvAJeEhH7-mWEiNY4fSHbH3FV_HpzAtY2ug22mYDK52E-a0-cmqnAQZCB1SegXGdtJ8oQxWDsfN1X87Cf8QmNahntFAITaXFIeaoRfmkr6uYDOzcd44SA" id="Token2001266279" /></div><div class="visual-input"><div class="input text required"><label for="UserUsername">Username</label><input name="data[User][username]" type="text" required="1" minlength="1" maxlength="30" id="UserUsername" /></div></div><div class="visual-input"><div class="input password"><label for="UserPassword">Password</label><input type="password" name="data[User][password]" required="1" minlength="6" id="UserPassword" /></div></div><div class="input checkbox"><input type="hidden" name="data[User][remember_me]" id="UserRememberMe_" value="0" /><input type="checkbox" name="data[User][remember_me]" value="1" id="UserRememberMe" /><label for="UserRememberMe">Remember Me</label></div><input type="hidden" name="data[User][adscore]" value="UL" id="UserAdscore" /><input type="hidden" name="data[User][adscore_ec]" value="" id="UserAdscoreEc" /><div class="submit"><input type="submit" value="Log in" /></div><div style="display:none;"><input type="hidden" name="data[_Token][fields]" value="97152997022a8257cab74c5b5d82e55cb81e618a%3AUser.adscore%7CUser.adscore_ec" id="TokenFields174681921" /></div></form><a href="/users/forgot" class="reset">Reset password</a>            </div>
+        </div>
+    </div>
+</div>
+      </div>
+    </body>
+</html>
