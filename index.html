@@ -4,9 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fast YouTube Downloader & MP3</title>
-
-    <meta name="monetag" content="582141df11779523445ef8c6a9577dc4">
-
+    
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('./sw.js').then(function(registration) {
+                    console.log('SW registered: ', registration.scope);
+                }, function(err) {
+                    console.log('SW failed: ', err);
+                });
+            });
+        }
+    </script>
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f9f9f9; text-align: center; padding: 20px; margin: 0; }
         .wrapper { max-width: 500px; margin: 20px auto; background: #fff; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 1px solid #eee; }
@@ -44,9 +53,9 @@
                 alert("कृपया पहले YouTube लिंक डालें!");
                 return;
             }
-            
+            // विज्ञापन खोलना
             window.open("https://www.highperformancegate.com/28634833", "_blank");
-            
+            // असली डाउनलोड लिंक खोलना
             const finalURL = "https://loader.to/?url=" + encodeURIComponent(link);
             window.open(finalURL, "_blank");
         }
