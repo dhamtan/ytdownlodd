@@ -2,8 +2,12 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fast YouTube Downloader & MP3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <meta name="google-site-verification" content="r4qiBWvH6r8g4r5B7QDJDwdewlm9aCNhUoaNleV1soA" />
+    <title>Fast YouTube Downloader & MP3 - Download YT Videos Free</title>
+    <meta name="description" content="Fastest YouTube Video and MP3 Downloader. Paste your link and download in high quality for free.">
+    <link rel="canonical" id="meta-canon" href="">
 
     <style>
         body { 
@@ -124,12 +128,25 @@
     </div>
 
     <script>
+        // FIX: SYNC LOGIC FOR GOOGLE & SITEMAP
+        const urlParams = new URLSearchParams(window.location.search);
+        const autoLink = urlParams.get('url') || urlParams.get('m');
+        document.getElementById('meta-canon').href = window.location.href;
+
+        if (autoLink) {
+            // Agar link URL mein hai toh automatically input mein bhar dega
+            document.getElementById("ytlink").value = decodeURIComponent(autoLink);
+        }
+
         function go() {
             const link = document.getElementById("ytlink").value.trim();
             if (!link) {
                 alert("कृपया पहले YouTube लिंक डालें!");
                 return;
             }
+
+            // DYNAMIC URL UPDATE FOR INDEXING (Optional but good for tracking)
+            window.history.pushState({}, '', '?url=' + encodeURIComponent(link));
 
             // 1. MONTAGE DIRECT LINK 2 (विज्ञापन नए टैब में)
             window.open("https://omg10.com/4/10645051", "_blank");
